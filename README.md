@@ -1,4 +1,4 @@
-# Foraging Behavior Simulation – Marginal Value Theorem
+# Foraging Behavior Simulation- Marginal Value Theorem
 
 A computational implementation of the Marginal Value Theorem (MVT) for studying optimal patch-leaving decisions in depleting resource environments.
 
