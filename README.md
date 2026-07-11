@@ -1,79 +1,27 @@
-# Foraging Behavior Simulation – Marginal Value Theorem (MVT)
+Foraging Behavior Simulation – Marginal Value Theorem
+A computational implementation of the Marginal Value Theorem (MVT) for studying optimal patch-leaving decisions in depleting resource environments.
+Background
+The MVT (Charnov, 1976) provides a normative account of patch-leaving behavior: a forager maximizing long-run intake rate should leave a patch when its instantaneous gain rate equals the average rate achievable across the environment, including travel time between patches. This prediction has been tested across a wide range of species and serves as a foundational benchmark in both behavioral ecology and computational models of decision-making.
+This project implements the MVT computationally and examines how the optimal leaving time shifts under varying patch quality and travel cost. A secondary motivation was to connect the MVT framework to questions about belief-updating timescales: if a forager's estimate of its current intake rate lags behind the true rate, this produces a directional bias toward overstaying, whose magnitude depends on the ratio between the patch depletion timescale and the agent's internal updating timescale.
+Mathematical Model
+Cumulative energy gain in a patch follows a diminishing-returns function:
+g(t) = G_max * (1 - exp(-lambda * t))
+where G_max is the maximum available resource and lambda is the depletion rate.
+The optimal leaving time t* satisfies the marginal condition:
+g'(t*) = g(t*) / (t* + t_travel)
+This is equivalent to finding the point on the gain curve where the tangent line drawn from -t_travel on the time axis is tangent to the curve. The slope of this tangent gives the maximum achievable long-run intake rate.
+Simulations
 
-A computational implementation of the **Marginal Value Theorem** (Charnov, 1976), one of the foundational models in behavioral ecology and computational decision-making research.
+Classic MVT diagram with optimal tangent-line construction
+Effect of travel time on optimal leaving threshold
+Patch quality comparison across depletion rates
+Instantaneous gain rate dynamics and the environmental average threshold
 
----
-
-## Background
-
-The MVT addresses a classic optimization problem: given that food resources in a patch deplete over time, when should a forager leave to maximize its long-term energy intake rate?
-
-The answer: **leave when the instantaneous gain rate drops to the average rate achievable across the environment** (including travel time between patches).
-
-This simple rule has been shown to predict foraging behavior across a wide range of species — from bees and birds to primates and humans — and provides a normative benchmark for studying how real agents deviate from optimality.
-
----
-
-## Mathematical Model
-
-**Gain function** (diminishing returns in a patch):
-
-$$g(t) = G_{\max}\left(1 - e^{-\lambda t}\right)$$
-
-**Optimal leaving time** $t^*$ satisfies the marginal condition:
-
-$$g'(t^*) = \frac{g(t^*)}{t^* + t_{\text{travel}}}$$
-
-This is equivalent to finding the point on the gain curve where the tangent line from $-t_{\text{travel}}$ on the time axis is tangent to the curve — the classic geometric construction of the MVT.
-
----
-
-## Simulations
-
-### 1. Classic MVT diagram
-The gain curve with the optimal tangent line. The tangent point gives $t^*$.
-
-![MVT Classic](mvt_classic.png)
-
-### 2. Effect of travel time
-Longer travel time between patches → longer optimal stay in each patch.
-
-![Travel Time Effect](travel_time_effect.png)
-
-### 3. Patch quality comparison
-Richer patches with slower depletion rates warrant longer foraging times.
-
-![Patch Quality](patch_quality_effect.png)
-
-### 4. Gain rate dynamics
-The forager leaves when instantaneous gain rate crosses the environmental average (dashed lines).
-
-![Gain Rate](gain_rate_dynamics.png)
-
----
-
-## Usage
-
-```bash
+Usage
 pip install numpy matplotlib scipy
 python mvt.py
-```
-
----
-
-## Repository Structure
-
-```
-foraging-mvt-simulation/
-├── mvt.py              # Main simulation and visualization
-├── README.md           # This file
-└── requirements.txt
-```
-
----
-
-## References
-
-- Charnov, E. L. (1976). Optimal foraging: the marginal value theorem. *Theoretical Population Biology*, 9(2), 129–136.
-- Stephens, D. W., & Krebs, J. R. (1986). *Foraging Theory*. Princeton University Press.
-- Pyke, G. H. (1984). Optimal foraging theory: a critical review. *Annual Review of Ecology and Systematics*, 15, 523–575.
+References
+Charnov, E. L. (1976). Optimal foraging: the marginal value theorem. Theoretical Population Biology, 9(2), 129-136.
+Stephens, D. W., & Krebs, J. R. (1986). Foraging Theory. Princeton University Press.
+Constantino, S. M., & Daw, N. D. (2015). Learning the opportunity cost of time in a patch-foraging task. Cognitive, Affective, & Behavioral Neuroscience, 15(4), 837-853.
+Niv, Y., Daw, N. D., Joel, D., & Dayan, P. (2007). Tonic dopamine: opportunity costs and the control of response vigor. Psychopharmacology, 191(3), 507-520.
